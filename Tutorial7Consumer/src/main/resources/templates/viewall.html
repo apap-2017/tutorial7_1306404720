@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>View All Students</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+    </head>
+    <body>
+    <div th:replace="fragments/fragment :: header"></div>
+    
+        <h1>All Students</h1>
+        
+        <table id = "viewalltable">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>NPM</th>
+					<th>Name</th>
+					<th>GPA</th>
+					<th>Cum laude</th>
+					<th>Delete</th>
+					<th>Update</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+			<div th:each="student,iterationStatus: ${students}" th:class="${iterationStatus.odd}? 'odd'">
+				<tr>
+            	
+	            <td th:text="${iterationStatus.count}">No. 1</td>
+		       	<td th:text="${student.npm}">Student NPM</td>
+		       	<td th:text="${student.name}">Student Name</td>
+		       	<td th:text="${student.gpa}">Student GPA</td>
+		       	<td th:text="${student.gpa>=3.49}? 'Cum Laude!':'Sangat Memuaskan!'"></td>
+				
+		       
+		       	<td><a th:href="'/student/delete/' + ${student.npm}" > Delete Data</a><br/></td>
+		       	<td><a th:href="'/student/update/' + ${student.npm}" > Update Data</a><br/></td>
+		       	<!-- <h3>Kuliah yang diambil</h3>
+				<ul th:each="course,iterationStatus: ${student.courses}">
+					<li th:text="${course.name} + '-' + ${course.credits} + ' sks'">
+						Nama kuliah-X SKS
+					</li>       
+	       		</ul> -->
+		       	</tr>
+	       	
+       	</div>			
+			</tbody>
+		</table>
+        
+    	
+    </body>
+    <script>
+    $(document).ready(function(){
+        $('#viewalltable').DataTable();
+    });
+    </script>
+</html>
