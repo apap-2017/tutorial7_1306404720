@@ -25,8 +25,8 @@ import com.example.model.StudentModel;
 		
 		@Override
 		public StudentModel selectStudent (String npm){
-		StudentModel student =restTemplate.getForObject("http://localhost:8080/rest/student/view/"+npm, StudentModel.class);
-		return student;
+			StudentModel student =restTemplate.getForObject("http://localhost:8080/rest/student/view/"+npm, StudentModel.class);
+			return student;
 		}
 		
 		@Override
